@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ATNAVICS PRE-DEPLOYMENT TOOL</title>
+  <subtitle>Use at the consumers discretion. Contact creator for recommendations and inconsistencies.</subtitle>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0b1014;
+  color: #e7edf2;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+}
+
+.atnavics-hero {
+  min-height: 240px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 8, 11, 0.94) 0%,
+      rgba(3, 8, 11, 0.74) 48%,
+      rgba(3, 8, 11, 0.4) 100%
+    ),
+    #162026;
+  border-bottom: 3px solid #495861;
+}
+
+.hero-overlay {
+  width: min(1360px, calc(100% - 40px));
+  margin: 0 auto;
+  min-height: 240px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 28px 0 34px;
+}
+
+.back-btn {
+  width: fit-content;
+  color: #8adfff;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  color: #ffffff;
+}
+
+.hero-copy {
+  max-width: 760px;
+}
+
+.hero-kicker {
+  margin: 0 0 10px;
+  color: #7ddcff;
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 74px);
+  letter-spacing: 5px;
+}
+
+.hero-copy > p:last-child {
+  margin: 8px 0 0;
+  color: #c7d4dc;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.layout {
+  width: min(1360px, calc(100% - 40px));
+  margin: 32px auto 60px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+#leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  margin: 0;
+  padding: 18px;
+
+  background: #11181d;
+  border: 1px solid #35424a;
+  border-radius: 6px;
+}
+
+.section-title {
+  margin: 0 0 14px;
+
+  color: #e7edf2;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #b8c5cc;
+  font-size: 12px;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+
+  background: #081015;
+  color: #edf5f8;
+
+  border: 1px solid #4a5b64;
+  border-radius: 4px;
+
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #4acfff;
+  outline-offset: 1px;
+}
+
+button {
+  min-height: 42px;
+  padding: 9px 14px;
+
+  border: 1px solid #4bbde8;
+  border-radius: 4px;
+
+  background: #096b93;
+  color: #ffffff;
+
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0d82b1;
+}
+
+.output {
+  margin-top: 12px;
+  padding: 12px;
+
+  background: #091116;
+  color: #cfeeff;
+
+  border: 1px dashed #46636f;
+  border-radius: 5px;
+
+  white-space: pre-wrap;
+  font-family: Consolas, monospace;
+}
+
+.note {
+  margin-top: 6px;
+  color: #93a7b2;
+  font-size: 12px;
+}
+
+.pointlist {
+  margin: 10px 0 0;
+  padding-left: 18px;
+
+  font-family: Consolas, monospace;
+}
+
+.pointlist li {
+  margin: 10px 0;
+}
+
+.ptlabel {
+  margin-right: 8px;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}
+
+.table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-family: Consolas, monospace;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+
+  border: 1px solid #35424a;
+
+  vertical-align: top;
+}
+
+.table th {
+  text-align: left;
+  background: #0b1217;
+  color: #7ddcff;
+}
+
+.table td {
+  background: #091116;
+}
+
+.value {
+  text-align: right;
+  white-space: nowrap;
+}
+
+#rightCol {
+  position: sticky;
+  top: 18px;
+}
+
+.refsBox {
+  margin-top: 18px;
+  padding-top: 14px;
+
+  border-top: 1px solid #35424a;
+}
+
+.refsList {
+  display: grid;
+  gap: 10px;
+}
+
+.refItem {
+  padding: 10px;
+
+  background: #0b1217;
+
+  border: 1px solid #35424a;
+  border-radius: 5px;
+}
+
+.refItem summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.refMeta {
+  margin-top: 6px;
+
+  color: #93a7b2;
+  font-size: 12px;
+}
+
+.refActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 8px;
+}
+
+.refActions a {
+  display: inline-block;
+  padding: 8px 10px;
+
+  background: #096b93;
+  color: #ffffff;
+
+  border: 1px solid #4bbde8;
+  border-radius: 4px;
+
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 520px;
+  margin-top: 10px;
+
+  background: white;
+
+  border: 1px solid #35424a;
+  border-radius: 5px;
+}
+
+#disclaimerOverlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  z-index: 9999;
+}
+
+#disclaimerBox {
+  width: min(720px, 90%);
+  padding: 22px;
+
+  background: #11181d;
+  color: #e7edf2;
+
+  border: 1px solid #4a5b64;
+  border-radius: 8px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#disclaimerBox h2 {
+  margin-top: 0;
+  color: #7ddcff;
+}
+
+#disclaimerBox p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#disclaimerActions {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 18px;
+}
+
+#reflModalOverlay > div {
+  background: #11181d !important;
+  color: #e7edf2 !important;
+
+  border: 1px solid #4a5b64 !important;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  #rightCol {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+/* ================= DISCLAIMER MODAL ================= */
+#disclaimerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#disclaimerBox {
+  background: #ffffff;
+  max-width: 720px;
+  width: 90%;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+#disclaimerBox h2 {
+  margin-top: 0;
+}
+
+#disclaimerBox p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#disclaimerActions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#disclaimerActions button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #f2f2f2;
+  cursor: pointer;
+  font-weight: 600;
+}
+/* =============== END DISCLAIMER MODAL =============== */
+  </style>
+</head>
+
+<body>
+  <header class="atnavics-hero">
+
+  <div class="hero-overlay">
+
+    <a
+      href="../"
+      class="back-btn"
+    >
+      ← BACK TO HANGAR
+    </a>
+
+    <div class="hero-copy">
+
+      <p class="hero-kicker">
+        AIR TRAFFIC CONTROL
+      </p>
+
+      <h1>ATNAVICS AID</h1>
+
+      <p>
+        Pre-Deployment Planning Tools
+      </p>
+
+    </div>
+
+  </div>
+
+</header>
+<!-- ================= DISCLAIMER MODAL ================= -->
+<div id="disclaimerOverlay">
+  <div id="disclaimerBox">
+    <h2>Disclaimer</h2>
+
+    <p>
+      This web application is provided for <strong>planning, visualization,
+      and educational purposes only</strong>.
+    </p>
+
+    <p>
+      This tool is <strong>not</strong> an official U.S. Army, FAA, or DoD system,
+      and it is <strong>not certified for operational use</strong>.
+    </p>
+
+    <p>
+      All calculations, coordinates, azimuths, distances, and generated KML files
+      are derived from user-provided inputs and doctrinal concepts and
+      <strong>must be independently verified</strong> using approved publications,
+      procedures, and systems prior to any operational or training application.
+    </p>
+
+    <p>
+      The author assumes no responsibility or liability for misuse,
+      misinterpretation, or reliance on the outputs of this tool.
+    </p>
+
+    <p>
+      By proceeding, you acknowledge and accept these limitations.
+    </p>
+
+    <p>
+      &mdash; Developed by CW2 Roman Holland II, US Army
+    </p>
+
+    <p>
+      email: roman.g.holland2.mil@army.mil
+    </p>
+
+    <div id="disclaimerActions">
+      <button
+  id="acceptDisclaimerBtn"
+  onclick="localStorage.setItem('da3501_disclaimer_ack_v1','true'); document.getElementById('disclaimerOverlay').style.display='none';"
+>
+  I Understand and Accept
+</button>
+    </div>
+  </div>
+</div>
+<!-- =============== END DISCLAIMER MODAL =============== -->
+  <div class="layout">
+    <!-- LEFT COLUMN -->
+    <div id="leftCol">
+
+      <div class="card">
+        <div class="section-title">Glideslope, Threshold Crossing Height, and Magnetic Variation</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; max-width:520px;">
+          <div>
+            <label for="gsDeg">Glideslope (degrees)</label>
+            <input id="gsDeg" placeholder="e.g., 3.00" inputmode="decimal" />
+          </div>
+          <div>
+            <label for="tchFt">Threshold Crossing Height (ft)</label>
+            <input id="tchFt" placeholder="e.g., 50" inputmode="decimal" />
+          </div>
+          <div>
+            <label for="mvDeg">Magnetic Variation (°)</label>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <input
+                id="mvDeg"
+                type="number"
+                step="0.1"
+                min="0"
+                placeholder="e.g., 8.5"
+                inputmode="decimal"
+                style="flex:1;"
+              />
+              <select id="mvDir" style="width:56px;">
+                <option value="E">E</option>
+                <option value="W">W</option>
+              </select>
+            </div>
+          </div>    
+        </div>
+        <div class="output" id="gsOut">—</div>
+      </div>
+      <div class="card">
+        <div class="section-title">Runway Threshold (DMS)</div>
+        <div class="row">
+          <div>
+            <div class="section-title" style="font-weight:600;">Latitude</div>
+            <div class="grid">
+              <div><label for="latDeg">Degrees</label><input id="latDeg" placeholder="36" /></div>
+              <div><label for="latMin">Minutes</label><input id="latMin" placeholder="56" /></div>
+              <div><label for="latSec">Seconds</label><input id="latSec" placeholder="48.98" /></div>
+              <div>
+                <label for="latHem">Hem</label>
+                <select id="latHem"><option value="N">N</option><option value="S">S</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-title" style="font-weight:600;">Longitude</div>
+            <div class="grid">
+              <div><label for="lonDeg">Degrees</label><input id="lonDeg" placeholder="44" /></div>
+              <div><label for="lonMin">Minutes</label><input id="lonMin" placeholder="34" /></div>
+              <div><label for="lonSec">Seconds</label><input id="lonSec" placeholder="53.21" /></div>
+              <div>
+                <label for="lonHem">Hem</label>
+                <select id="lonHem"><option value="E">E</option><option value="W">W</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Departure End (DMS)</div>
+        <div class="row">
+          <div>
+            <div class="section-title" style="font-weight:600;">Latitude</div>
+            <div class="grid">
+              <div><label for="depLatDeg">Degrees</label><input id="depLatDeg" placeholder="36" /></div>
+              <div><label for="depLatMin">Minutes</label><input id="depLatMin" placeholder="56" /></div>
+              <div><label for="depLatSec">Seconds</label><input id="depLatSec" placeholder="48.98" /></div>
+              <div>
+                <label for="depLatHem">Hem</label>
+                <select id="depLatHem"><option value="N">N</option><option value="S">S</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-title" style="font-weight:600;">Longitude</div>
+            <div class="grid">
+              <div><label for="depLonDeg">Degrees</label><input id="depLonDeg" placeholder="44" /></div>
+              <div><label for="depLonMin">Minutes</label><input id="depLonMin" placeholder="34" /></div>
+              <div><label for="depLonSec">Seconds</label><input id="depLonSec" placeholder="53.21" /></div>
+              <div>
+                <label for="depLonHem">Hem</label>
+                <select id="depLonHem"><option value="E">E</option><option value="W">W</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="output" id="rwyHeadingOut">—</div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Radar Placement</div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:12px; max-width:720px; align-items:end;">
+          <div>
+            <label for="centerlineDistFt">Centerline distance from RPI (ft)</label>
+            <input id="centerlineDistFt" value="2220" inputmode="decimal" />
+          </div>
+
+          <div>
+            <label for="dispThreshFt">Displaced Threshold distance from Threshold (ft)</label>
+            <input id="dispThreshFt" value="0" inputmode="decimal" />
+          </div>
+
+          <div>
+            <label for="radarOffsetFt">Radar offset from centerline (DRCL) (ft)</label>
+            <input id="radarOffsetFt" placeholder="e.g., 300" inputmode="decimal" />
+          </div>
+
+          <div>
+            <label for="radarSide">Side of runway (Pilot's POV)</label>
+            <select id="radarSide">
+              <option value="LEFT">LEFT</option>
+              <option value="RIGHT">RIGHT</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="reflRightFt">Reflector RIGHT of runway centerline at RPI (6a) (ft)</label>
+            <input id="reflRightFt" placeholder="e.g., 600" inputmode="decimal" />
+          </div>
+
+          <div>
+            <label for="reflLeftFt">Reflector LEFT of runway centerline at RPI (6b) (ft)</label>
+            <input id="reflLeftFt" placeholder="e.g., 600" inputmode="decimal" />
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <label style="display:block; margin-bottom:6px;">ELP (DD MM SS + Dir)</label>
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:12px;">
+              <input id="elpD" type="number" min="0" step="1" placeholder="DD" />
+              <input id="elpM" type="number" min="0" max="59" step="1" placeholder="MM" />
+              <input id="elpS" type="number" min="0" max="59.9" step="0.1" placeholder="SS" />
+              <select id="elpDir">
+                <option value="UP">UP</option>
+                <option value="DOWN">DOWN</option>
+              </select>
+            </div>
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <label style="display:block; margin-bottom:6px;">ACOR (DD MM SS + Dir)</label>
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:12px;">
+              <input id="acorD" type="number" min="0" step="1" placeholder="DD" />
+              <input id="acorM" type="number" min="0" max="59" step="1" placeholder="MM" />
+              <input id="acorS" type="number" min="0" max="59.9" step="0.1" placeholder="SS" />
+              <select id="acorDir">
+                <option value="CW">CW</option>
+                <option value="CCW">CCW</option>
+              </select>
+            </div>
+          </div>        
+        </div>
+
+<div style="margin-top:12px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+  <button id="btnKml">Generate KML (All Points)</button>
+  <button id="btnApproachKml">Generate Approach Fan KML</button>
+  <button id="btnMvaKml">Generate MVA Chart KML</button>
+  <button id="btnReflectorTable">View Reflector Table</button>
+  <div class="note" id="kmlStatus" style="margin:0;">—</div>
+</div>
+<div class="note" id="mvaStatus" style="margin-top:6px;">—</div>
+
+
+        <div class="note">(Be sure to check your work through practical application.)</div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Documented Points</div>
+        <ul class="pointlist">
+          <li><span class="ptlabel">Threshold:</span><span id="ptThreshold">—</span></li>
+          <li><span class="ptlabel">RPI (DTHR on Heading):</span><span id="ptRPI">—</span></li>
+          <li><span class="ptlabel">Centerline Point (RPI + distance):</span><span id="ptCL">—</span></li>
+          <li><span class="ptlabel">Radar Point (offset LEFT/RIGHT):</span><span id="ptRadar">—</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="section-title">LAT / LON Points</div>
+
+        <ul class="pointlist">
+          <li><span class="ptlabel">(1) Landing Threshold (centerline):</span><span id="pt1_Threshold">—</span></li>
+          <li><span class="ptlabel">(2) Runway Point of Intercept (RPI) (centerline):</span><span id="pt2_RPI">—</span></li>
+          <li><span class="ptlabel">(3) Centerline Point closest to PAR antenna:</span><span id="pt3_CLClosest">—</span></li>
+          <li><span class="ptlabel">(4) Departure End of Runway (centerline):</span><span id="pt4_DepEnd">—</span></li>
+          <li><span class="ptlabel">(5a/5b) PAR Antenna site:</span><span id="pt5_PAR">—</span></li>
+          <li><span class="ptlabel">(6a) Reflector Right of Runway:</span><span id="pt6a_ReflR">—</span></li>
+          <li><span class="ptlabel">(6b) Reflector Left of Runway:</span><span id="pt6b_ReflL">—</span></li>
+          <li><span class="ptlabel">(7) Displaced Threshold (centerline):</span><span id="pt7_DispThr">—</span></li>
+        </ul>
+
+        <div class="note">Reflectors are computed from RPI + perpendicular offsets.</div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Distances (ft)</div>
+
+        <ul class="pointlist">
+          <li><span class="ptlabel">(7 → 1)</span> Displaced Thr → Thr: <span id="dist_7_1">—</span></li>
+          <li><span class="ptlabel">(1 → 2)</span> Thr → RPI: <span id="dist_1_2">—</span></li>
+          <li><span class="ptlabel">(2 → 3)</span> RPI → CL (closest to PAR): <span id="dist_2_3">—</span></li>
+
+          <li><span class="ptlabel">(1 → 4)</span> Thr → Departure End: <span id="dist_1_4">—</span></li>
+          <li><span class="ptlabel">(3 → 5a/b)</span> CL → PAR site: <span id="dist_3_5ab">—</span></li>
+          <li><span class="ptlabel">(5a/b → 2)</span> PAR site → RPI: <span id="dist_5ab_2">—</span></li>
+
+          <li><span class="ptlabel">(1 → 6a)</span> Thr → Reflector Right: <span id="dist_1_6a">—</span></li>
+          <li><span class="ptlabel">(1 → 6b)</span> Thr → Reflector Left: <span id="dist_1_6b">—</span></li>
+
+          <li><span class="ptlabel">(2 → 7)</span> RPI → Displaced Thr: <span id="dist_2_7">—</span></li>
+        </ul>
+
+        <div class="note">Reflector distances populate when reflector offsets are entered.</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div id="rightCol" class="card">
+      <div class="section-title">Outputs</div>
+
+      <table class="table">
+        <thead>
+          <tr><th>Field</th><th class="value">Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AZRC</td><td class="value" id="out_AZRC">—</td></tr>
+          <tr><td>AZRP</td><td class="value" id="out_AZRP">—</td></tr>
+          <tr><td>Heading (True)</td><td class="value" id="out_HeadingTrue">—</td></tr>
+          <tr><td>Heading (Mag)</td><td class="value" id="out_HeadingMag">—</td></tr>
+          <tr><td>DTHR</td><td class="value" id="out_DTHR">—</td></tr>
+          <tr><td>AZP</td><td class="value" id="out_AZP">—</td></tr>
+          <tr><td>DRCL</td><td class="value" id="out_DRCL">—</td></tr>
+          <tr><td>DTD</td><td class="value" id="out_DTD">—</td></tr>
+          <tr><td>DTH</td><td class="value" id="out_DTH">—</td></tr>
+          <tr><td>AZO</td><td class="value" id="out_AZO">—</td></tr>
+          <tr><td>AZB</td><td class="value" id="out_AZB">—</td></tr>
+          <tr><td>SLAT</td><td class="value" id="out_SLAT">—</td></tr>
+          <tr><td>SLON</td><td class="value" id="out_SLON">—</td></tr>
+          <tr><td>SALT</td><td class="value" id="out_SALT">—</td></tr>
+          <tr><td>MV</td><td class="value" id="out_MV">—</td></tr>
+          <tr><td>RTD</td><td class="value" id="out_RTD">—</td></tr>
+          <tr><td>DH</td><td class="value" id="out_DH">—</td></tr>
+          <tr><td>SD</td><td class="value" id="out_SD">—</td></tr>
+          <tr><td>SA</td><td class="value" id="out_SA">—</td></tr>
+          <tr><td>ACOR</td><td class="value" id="out_ACOR">—</td></tr>
+          <tr><td>ELP</td><td class="value" id="out_ELP">—</td></tr>
+          <tr><td>PAA</td><td class="value" id="out_PAA">—</td></tr>
+          <tr><td>PBA</td><td class="value" id="out_PBA">—</td></tr>
+          
+        </tbody>
+      </table>
+            <!-- ATSCOM SSI IMAGE -->
+      <div
+        style="
+          margin-top:16px;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+        ">
+        <img
+          src="US_Army_Air_Traffic_Services_Command_SSI.png"
+          alt="US Army Air Traffic Services Command SSI"
+          style="
+            max-width:100%;
+            max-height:420px;
+            height:auto;
+            object-fit:contain;
+          "
+        />
+      </div>
+            <!-- REFERENCES -->
+      <div class="refsBox">
+        <div class="section-title">References</div>
+
+        <div class="refsList">
+          <details class="refItem">
+            <summary>UFC 3-260-01 (COMING SOON)</summary>
+            <div class="refMeta">Embedded PDF + download.</div>
+            <div class="refActions">
+              <a href="./refs/UFC_3-260-01.pdf" download>Download PDF</a>
+              <a href="./refs/UFC_3-260-01.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            </div>
+            <iframe class="pdfFrame" loading="lazy" src="./refs/UFC_3-260-01.pdf"></iframe>
+          </details>
+
+          <details class="refItem">
+            <summary>TC 3-04.15 (COMING SOON)</summary>
+            <div class="refMeta">Embedded PDF + download.</div>
+            <div class="refActions">
+              <a href="./refs/TC_3-04.15.pdf" download>Download PDF</a>
+              <a href="./refs/TC_3-04.15.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            </div>
+            <iframe class="pdfFrame" loading="lazy" src="./refs/TC_3-04.15.pdf"></iframe>
+          </details>
+
+          <details class="refItem">
+            <summary>DA Form 3501-1</summary>
+            <div class="refMeta">Embedded PDF + download.</div>
+            <div class="refActions">
+              <a href="./refs/DA_Form_3501-1.pdf" download>Download PDF</a>
+              <a href="./refs/DA_Form_3501-1.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            </div>
+            <iframe class="pdfFrame" loading="lazy" src="./refs/DA_Form_3501-1.pdf"></iframe>
+          </details>
+          <details class="refItem">
+            <summary>TM 11-5840-381-10 (COMING SOON)</summary>
+            <div class="refMeta">Embedded PDF + download.</div>
+            <div class="refActions">
+              <a href="./refs/TM_11-5840-381-10.pdf" download>Download PDF</a>
+              <a href="./refs/TM_11-5840-381-10.pdf" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            </div>
+            <iframe class="pdfFrame" loading="lazy" src="./refs/TM 11-5840-381-10.pdf"></iframe>
+          </details>
+
+          <div class="refItem">
+            <div style="font-weight:700;">ACES 2.0</div>
+            <div class="refMeta">External reference link.</div>
+            <div class="refActions">
+              <a href="https://aeronautical.nga.mil/login" target="_blank" rel="noopener noreferrer">Open ACES 2.0</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:10px;">
+          Utilize ACES 2.0 for official documents and forms. Find approach plates, DVOF data, and other useful tools that enable proficiency in your setup. 
+        </div>
+      </div>
+      <!-- /REFERENCES -->
+
+
+    </div>
+  </div>
+
+  <!-- Reflector Table Modal -->
+  <div id="reflModalOverlay" style="
+    position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    display:none; align-items:center; justify-content:center;
+    padding:18px; z-index:9999;">
+    <div role="dialog" aria-modal="true" aria-labelledby="reflModalTitle"
+      style="width:min(920px, 100%); max-height:90vh; overflow:hidden;
+            background:#fff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">
+      
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid #eee;">
+        <div>
+          <div id="reflModalTitle" style="font-weight:800;">Reflector Minimum Offset Table</div>
+          <div style="font-size:12px; color:#555; margin-top:2px;">
+            Distance from PAR antenna along centerline to reflector locations → minimum DR1C/DR2C (ft)
+          </div>
+        </div>
+        <button id="btnCloseReflModal">Close</button>
+      </div>
+
+      <div style="padding:14px 16px; overflow:auto; max-height:calc(90vh - 64px);">
+        <table style="width:100%; border-collapse:collapse; font-family:Consolas, monospace; font-size:14px;">
+          <thead>
+            <tr>
+              <th style="text-align:left; background:#f6f6f6; border:1px solid #ddd; padding:10px;">
+                Distance from PAR Antenna along Centerline to Reflector Locations (ft)
+              </th>
+              <th style="text-align:left; background:#f6f6f6; border:1px solid #ddd; padding:10px; width:320px;">
+                Minimum Distance from Runway Centerline to Reflector Locations (DR1C/DR2C) (ft)
+              </th>
+            </tr>
+          </thead>
+          <tbody id="reflTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AME Aid</title>
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+  <div class="ame-shell">
+
+    <header class="ame-hero">
+
+      <div class="hero-overlay">
+
+        <a
+          href="../index.html"
+          class="back-btn"
+        >
+          ← BACK TO HANGAR
+        </a>
+
+        <div class="hero-copy">
+          <p class="hero-kicker">
+            AIRFIELD MANAGEMENT ENGINEERING
+          </p>
+
+          <h1>AME AID</h1>
+
+          <p>
+            Runway and Landing Zone Assessment
+          </p>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="workspace">
+
+      <!-- LEFT SIDE -->
+      <section class="workspace-column">
+
+        <section class="panel">
+
+          <div class="panel-header">
+            <span>01</span>
+            <h2>Facility Definition</h2>
+          </div>
+
+          <div class="grid">
+
+            <div>
+              <label for="projectName">Project Name</label>
+
+              <input
+                type="text"
+                id="projectName"
+                placeholder="Example: Fort Example RWY 18/36"
+              >
+            </div>
+
+
+            <div>
+              <label for="facilityType">Facility Type</label>
+
+              <select id="facilityType">
+                <option value="runway">Fixed-Wing Runway</option>
+                <option value="lz">Landing Zone</option>
+              </select>
+            </div>
+
+
+            <div id="surfaceTypeGroup">
+
+              <label for="surfaceType">Surface Type</label>
+
+              <select id="surfaceType">
+                <option value="">Select Surface Type</option>
+                <option value="paved">Paved</option>
+                <option value="semiPrepared">Semi-Prepared</option>
+              </select>
+
+            </div>
+
+
+            <div id="aircraftTypeGroup">
+
+              <label for="aircraftType">Design Aircraft</label>
+
+              <select id="aircraftType">
+                <option value="">Select Aircraft Type</option>
+                <option value="C130">C-130</option>
+                <option value="C17">C-17</option>
+              </select>
+
+            </div>
+
+
+            <div id="operationalAircraftGroup">
+
+              <label for="operationalAircraftType">
+                Operational Aircraft
+              </label>
+
+              <select id="operationalAircraftType">
+                <option value="">Select Operational Aircraft</option>
+                <option value="U28_PC12_MC12">U-28 / PC-12 / MC-12</option>
+                <option value="C130">C-130</option>
+                <option value="C17">C-17</option>
+                <option value="C145A">C-145A</option>
+                <option value="C146A">C-146A</option>
+              </select>
+
+            </div>
+
+
+            <div id="lzWidthGroup">
+
+              <label for="lzWidth">
+                Usable LZ Width
+              </label>
+
+              <input
+                type="number"
+                id="lzWidth"
+                min="0"
+                step="1"
+                placeholder="Width in feet"
+              >
+
+            </div>
+
+
+            <div id="areaTypeGroup">
+
+              <label for="areaType">
+                Surrounding Area
+              </label>
+
+              <select id="areaType">
+                <option value="">Select Area Type</option>
+                <option value="unoccupied">Unoccupied Area</option>
+                <option value="occupiedBuiltUp">Occupied / Built-Up Area</option>
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label for="service">Service</label>
+
+              <select id="service">
+                <option value="army">Army</option>
+                <option value="airforce">Air Force</option>
+                <option value="navy">Navy</option>
+                <option value="marines">Marine Corps</option>
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label>Datum</label>
+
+              <input
+                type="text"
+                value="WGS 84"
+                disabled
+              >
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="panel">
+
+          <div class="panel-header">
+            <span>02</span>
+            <h2>Runway / LZ Endpoints</h2>
+          </div>
+
+
+          <div class="endpoint-grid">
+
+            <!-- END A -->
+            <div class="endpoint">
+
+              <h3>End A</h3>
+
+              <h4>Latitude</h4>
+
+              <div class="dms-row">
+                <input type="number" id="latADeg" placeholder="DD">
+                <input type="number" id="latAMin" placeholder="MM">
+                <input type="number" step="any" id="latASec" placeholder="SS.SS">
+
+                <select id="latADir">
+                  <option value="N">N</option>
+                  <option value="S">S</option>
+                </select>
+              </div>
+
+
+              <h4>Longitude</h4>
+
+              <div class="dms-row">
+                <input type="number" id="lonADeg" placeholder="DDD">
+                <input type="number" id="lonAMin" placeholder="MM">
+                <input type="number" step="any" id="lonASec" placeholder="SS.SS">
+
+                <select id="lonADir">
+                  <option value="W">W</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
+
+            </div>
+
+
+            <!-- END B -->
+            <div class="endpoint">
+
+              <h3>End B</h3>
+
+              <h4>Latitude</h4>
+
+              <div class="dms-row">
+                <input type="number" id="latBDeg" placeholder="DD">
+                <input type="number" id="latBMin" placeholder="MM">
+                <input type="number" step="any" id="latBSec" placeholder="SS.SS">
+
+                <select id="latBDir">
+                  <option value="N">N</option>
+                  <option value="S">S</option>
+                </select>
+              </div>
+
+
+              <h4>Longitude</h4>
+
+              <div class="dms-row">
+                <input type="number" id="lonBDeg" placeholder="DDD">
+                <input type="number" id="lonBMin" placeholder="MM">
+                <input type="number" step="any" id="lonBSec" placeholder="SS.SS">
+
+                <select id="lonBDir">
+                  <option value="W">W</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <button
+            id="calculateBtn"
+            class="primary-action"
+          >
+            CALCULATE FACILITY GEOMETRY
+          </button>
+
+        </section>
+
+      </section>
+
+
+      <!-- RIGHT SIDE -->
+      <aside class="workspace-column">
+
+        <section class="panel">
+
+          <div class="panel-header">
+            <span>03</span>
+            <h2>Calculated Geometry</h2>
+          </div>
+
+
+          <div class="results-grid">
+
+            <div class="result-box">
+              <span>Length</span>
+              <strong id="runwayLength">--</strong>
+            </div>
+
+
+            <div class="result-box">
+              <span>Bearing A → B</span>
+              <strong id="bearingAB">--</strong>
+            </div>
+
+
+            <div class="result-box">
+              <span>Bearing B → A</span>
+              <strong id="bearingBA">--</strong>
+            </div>
+
+
+            <div class="result-box">
+              <span>Midpoint</span>
+              <strong id="midpoint">--</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="panel export-panel">
+
+          <div class="panel-header">
+            <span>04</span>
+            <h2>Export</h2>
+          </div>
+
+
+          <p>
+            Generate a KML file containing the applicable airfield and
+            landing-zone criteria surfaces.
+          </p>
+
+
+          <button
+            id="kmlBtn"
+            class="export-action"
+          >
+            GENERATE KML
+          </button>
+
+        </section>
+
+      </aside>
+
+    </main>
+
+  </div>
+
+
+<script src="./criteria.js"></script>
+<script src="./app.js"></script>
+
+</body>
+
+</html>
