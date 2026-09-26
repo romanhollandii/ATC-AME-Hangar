@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GCA Traffic Pattern Builder</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="tool-header">
+
+        <a href="../" class="back-btn">
+            ← BACK TO HANGAR
+        </a>
+
+        <div class="header-copy">
+
+            <p class="kicker">
+                AIR TRAFFIC CONTROL
+            </p>
+
+            <h1>
+                GCA TRAFFIC PATTERN BUILDER
+            </h1>
+
+            <p class="subtitle">
+                Traffic Pattern Planning & KML Generation
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN WORKSPACE
+    =========================================== -->
+
+    <main class="workspace">
+
+
+        <!-- ======================================
+             RUNWAY DEFINITION
+        ======================================= -->
+
+        <section class="panel">
+
+            <div class="section-title">
+                RUNWAY DEFINITION
+            </div>
+
+
+            <!-- Runway Name -->
+
+            <div class="field">
+
+                <label for="runwayName">
+                    Runway / Location
+                </label>
+
+                <input
+                    type="text"
+                    id="runwayName"
+                    placeholder="Example: RWY 23"
+                >
+
+            </div>
+
+
+            <!-- ==================================
+                 RUNWAY END 1
+            =================================== -->
+
+            <h3>Runway End 1 (DMS)</h3>
+
+
+            <div class="latlon-row">
+
+
+                <!-- LATITUDE -->
+
+                <div class="coordinate-block">
+
+                    <div class="coordinate-heading">
+                        Latitude
+                    </div>
+
+                    <div class="dms-grid">
+
+                        <div>
+                            <label for="lat1Deg">
+                                Degrees
+                            </label>
+
+                            <input
+                                id="lat1Deg"
+                                type="number"
+                                placeholder="36"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat1Min">
+                                Minutes
+                            </label>
+
+                            <input
+                                id="lat1Min"
+                                type="number"
+                                placeholder="56"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat1Sec">
+                                Seconds
+                            </label>
+
+                            <input
+                                id="lat1Sec"
+                                type="number"
+                                step="0.01"
+                                placeholder="48.98"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat1Hem">
+                                Hem
+                            </label>
+
+                            <select id="lat1Hem">
+                                <option value="N">N</option>
+                                <option value="S">S</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LONGITUDE -->
+
+                <div class="coordinate-block">
+
+                    <div class="coordinate-heading">
+                        Longitude
+                    </div>
+
+                    <div class="dms-grid">
+
+                        <div>
+                            <label for="lon1Deg">
+                                Degrees
+                            </label>
+
+                            <input
+                                id="lon1Deg"
+                                type="number"
+                                placeholder="87"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon1Min">
+                                Minutes
+                            </label>
+
+                            <input
+                                id="lon1Min"
+                                type="number"
+                                placeholder="25"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon1Sec">
+                                Seconds
+                            </label>
+
+                            <input
+                                id="lon1Sec"
+                                type="number"
+                                step="0.01"
+                                placeholder="18.20"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon1Hem">
+                                Hem
+                            </label>
+
+                            <select id="lon1Hem">
+                                <option value="W">W</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 RUNWAY END 2
+            =================================== -->
+
+            <h3>Runway End 2 (DMS)</h3>
+
+
+            <div class="latlon-row">
+
+
+                <!-- LATITUDE -->
+
+                <div class="coordinate-block">
+
+                    <div class="coordinate-heading">
+                        Latitude
+                    </div>
+
+                    <div class="dms-grid">
+
+                        <div>
+                            <label for="lat2Deg">
+                                Degrees
+                            </label>
+
+                            <input
+                                id="lat2Deg"
+                                type="number"
+                                placeholder="36"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat2Min">
+                                Minutes
+                            </label>
+
+                            <input
+                                id="lat2Min"
+                                type="number"
+                                placeholder="56"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat2Sec">
+                                Seconds
+                            </label>
+
+                            <input
+                                id="lat2Sec"
+                                type="number"
+                                step="0.01"
+                                placeholder="48.98"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lat2Hem">
+                                Hem
+                            </label>
+
+                            <select id="lat2Hem">
+                                <option value="N">N</option>
+                                <option value="S">S</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LONGITUDE -->
+
+                <div class="coordinate-block">
+
+                    <div class="coordinate-heading">
+                        Longitude
+                    </div>
+
+                    <div class="dms-grid">
+
+                        <div>
+                            <label for="lon2Deg">
+                                Degrees
+                            </label>
+
+                            <input
+                                id="lon2Deg"
+                                type="number"
+                                placeholder="87"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon2Min">
+                                Minutes
+                            </label>
+
+                            <input
+                                id="lon2Min"
+                                type="number"
+                                placeholder="25"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon2Sec">
+                                Seconds
+                            </label>
+
+                            <input
+                                id="lon2Sec"
+                                type="number"
+                                step="0.01"
+                                placeholder="18.20"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="lon2Hem">
+                                Hem
+                            </label>
+
+                            <select id="lon2Hem">
+                                <option value="W">W</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             TRAFFIC PATTERN
+        ======================================= -->
+
+        <section class="panel">
+
+            <div class="section-title">
+                TRAFFIC PATTERN
+            </div>
+
+
+            <div class="pattern-grid">
+
+
+                <div class="field">
+
+                    <label for="patternLength">
+                        Upwind / Downwind Length
+                    </label>
+
+                    <div class="input-unit">
+
+                        <input
+                            type="number"
+                            id="patternLength"
+                            placeholder="11"
+                            step="0.1"
+                            min="0"
+                        >
+
+                        <span>NM</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="patternWidth">
+                        Base / Crosswind Distance
+                    </label>
+
+                    <div class="input-unit">
+
+                        <input
+                            type="number"
+                            id="patternWidth"
+                            placeholder="9"
+                            step="0.1"
+                            min="0"
+                        >
+
+                        <span>NM</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="trafficDirection">
+                        Traffic Direction
+                    </label>
+
+                    <select id="trafficDirection">
+
+                        <option value="right">
+                            Right Traffic
+                        </option>
+
+                        <option value="left">
+                            Left Traffic
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             GENERATE
+        ======================================= -->
+
+        <section class="panel action-panel">
+
+            <div class="section-title">
+                GENERATE
+            </div>
+
+
+            <button
+                id="buildPattern"
+                class="primary-btn"
+            >
+                BUILD TRAFFIC PATTERN
+            </button>
+
+
+            <button
+                id="exportKml"
+                class="export-btn"
+                disabled
+            >
+                EXPORT KML
+            </button>
+
+
+            <div
+                id="status"
+                class="status"
+            >
+                Awaiting runway and traffic pattern data.
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="./app.js"></script>
+
+</body>
+
+</html>

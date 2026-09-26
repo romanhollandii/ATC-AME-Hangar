@@ -1,0 +1,321 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0b1014;
+    color: #e8f4fa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+
+.tool-header {
+    position: relative;
+    padding: 28px 40px 32px;
+    border-bottom: 1px solid #24404d;
+    background:
+        linear-gradient(
+            135deg,
+            #10191f 0%,
+            #0d151a 60%,
+            #0a1115 100%
+        );
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #7ddcff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+}
+
+.header-copy {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.kicker {
+    margin: 0 0 5px;
+    color: #4acfff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    margin: 8px 0 0;
+    color: #8ca4af;
+    font-size: 14px;
+}
+
+/* MAIN WORKSPACE */
+
+.workspace {
+    width: min(1360px, calc(100% - 40px));
+    margin: 28px auto 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.panel {
+    background: #11181d;
+    border: 1px solid #253b46;
+    padding: 22px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+.section-title {
+    margin: -22px -22px 22px;
+    padding: 12px 16px;
+    background: #15232b;
+    border-bottom: 1px solid #294856;
+    color: #7ddcff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+h3 {
+    margin: 24px 0 12px;
+    color: #b9cbd3;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* INPUTS */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field label {
+    color: #9eb2bc;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 11px;
+    border: 1px solid #38505c;
+    background: #0c1317;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #4acfff;
+    box-shadow: 0 0 0 1px #4acfff;
+}
+
+.coordinate-grid,
+.pattern-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.pattern-grid .field:last-child {
+    grid-column: 1 / -1;
+}
+
+.input-unit {
+    display: grid;
+    grid-template-columns: 1fr 52px;
+}
+
+.input-unit input {
+    border-right: none;
+}
+
+.input-unit span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #38505c;
+    background: #18242b;
+    color: #7ddcff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ACTIONS */
+
+.action-panel {
+    grid-column: 1 / -1;
+}
+
+.primary-btn,
+.export-btn {
+    min-height: 46px;
+    padding: 10px 20px;
+    border: 1px solid;
+    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.primary-btn {
+    background: #0878ae;
+    border-color: #4acfff;
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background: #0990cf;
+}
+
+.export-btn {
+    margin-left: 8px;
+    background: #176b42;
+    border-color: #38b876;
+    color: #ffffff;
+}
+
+.export-btn:hover:not(:disabled) {
+    background: #208653;
+}
+
+.export-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.status {
+    margin-top: 18px;
+    padding: 13px;
+    border-left: 3px solid #4acfff;
+    background: #0c1317;
+    color: #8fa5af;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+    .tool-header {
+        padding: 22px 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .workspace {
+        width: calc(100% - 24px);
+        grid-template-columns: 1fr;
+    }
+
+    .action-panel {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 520px) {
+    .coordinate-grid,
+    .pattern-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pattern-grid .field:last-child {
+        grid-column: auto;
+    }
+
+    .primary-btn,
+    .export-btn {
+        width: 100%;
+    }
+
+    .export-btn {
+        margin: 10px 0 0;
+    }
+}
+/* ==========================================
+   DMS COORDINATE LAYOUT
+========================================== */
+
+.latlon-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+}
+
+.coordinate-block {
+    min-width: 0;
+}
+
+.coordinate-heading {
+    margin-bottom: 8px;
+    color: #e8f4fa;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr 1.25fr;
+    gap: 8px;
+}
+
+.dms-grid > div {
+    min-width: 0;
+}
+
+.dms-grid label {
+    display: block;
+    margin-bottom: 5px;
+    color: #9eb2bc;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.dms-grid input,
+.dms-grid select {
+    width: 100%;
+}
+
+
+/* Stack Latitude / Longitude only on small screens */
+
+@media (max-width: 800px) {
+    .latlon-row {
+        grid-template-columns: 1fr;
+    }
+}
+/* Make hemisphere selections clearly visible */
+.dms-grid select {
+    color: #ffffff;
+    background-color: #0c1317;
+    appearance: auto;
+    -webkit-appearance: auto;
+}
+
+.dms-grid select option {
+    color: #ffffff;
+    background-color: #0c1317;
+}
